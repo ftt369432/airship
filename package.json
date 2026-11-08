@@ -1,0 +1,30 @@
+{
+  "name": "airship",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Universal web-to-app autonomous deployment platform for Google Play and App Store",
+  "scripts": {
+    "build": "npm run build:vault && npm run build:shield && npm run build:mcp && npm run build:api && npm run build:dashboard",
+    "test": "node --test packages/vault/dist/vault.test.js packages/shield/dist/shield.test.js packages/mcp/dist/mcp.test.js apps/api/dist/api.test.js",
+    "build:vault": "npm run build --prefix packages/vault",
+    "test:vault": "npm run test --prefix packages/vault",
+    "build:shield": "npm run build --prefix packages/shield",
+    "test:shield": "npm run test --prefix packages/shield",
+    "build:mcp": "npm run build --prefix packages/mcp",
+    "test:mcp": "npm run test --prefix packages/mcp",
+    "dev:dashboard": "npm run dev --prefix apps/dashboard",
+    "build:dashboard": "npm run build --prefix apps/dashboard",
+    "dev:api": "npm run dev --prefix apps/api",
+    "build:api": "npm run build --prefix apps/api"
+  },
+  "keywords": [
+    "capacitor",
+    "google-play",
+    "app-store",
+    "fastlane",
+    "revenuecat",
+    "mobile-deployment"
+  ],
+  "author": "GenieFlow OS",
+  "license": "UNLICENSED"
+}

@@ -1,0 +1,34 @@
+default_platform(:android)
+
+platform :android do
+  desc "Build signed Android App Bundle (.aab)"
+  lane :build_aab do |options|
+    gradle(
+      task: "bundle",
+      build_type: "Release",
+      project_dir: "android/",
+      properties: {
+        "android.injected.signing.store.file" => ENV["AIRSHIP_KEYSTORE_PATH"],
+        "android.injected.signing.store.password" => ENV["AIRSHIP_KEYSTORE_PASSWORD"],
+        "android.injected.signing.key.alias" => ENV["AIRSHIP_KEY_ALIAS"],
+        "android.injected.signing.key.password" => ENV["AIRSHIP_KEY_PASSWORD"]
+      }
+    )
+  end
+
+  desc "Deploy to Google Play Internal Testing"
+  lane :publish_internal do |options|
+    aab_path = lane_context[SharedValues::GRADLE_AAB_OUTPUT_PATH] || options[:aab_path]
+    
+    supply(
+      aab: aab_path,
+      track: options[:track] || "internal",
+      json_key: ENV["AIRSHIP_GOOGLE_SERVICE_ACCOUNT_JSON"],
+      package_name: ENV["AIRSHIP_BUNDLE_ID"],
+      skip_upload_metadata: true,
+      skip_upload_images: true,
+      skip_upload_screenshots: true,
+      skip_upload_changelogs: false
+    )
+  end
+end

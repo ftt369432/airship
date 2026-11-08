@@ -1,0 +1,35 @@
+default_platform(:ios)
+
+platform :ios do
+  desc "Build and sign iOS IPA"
+  lane :build_ipa do |options|
+    app_store_connect_api_key(
+      key_id: ENV["AIRSHIP_ASC_KEY_ID"],
+      issuer_id: ENV["AIRSHIP_ASC_ISSUER_ID"],
+      key_content: ENV["AIRSHIP_ASC_PRIVATE_KEY_P8"],
+      is_key_content_base64: false,
+      in_house: false
+    )
+
+    build_app(
+      workspace: "ios/App/App.xcworkspace",
+      scheme: "App",
+      export_method: "app-store",
+      export_options: {
+        signingStyle: "automatic",
+        manageAppVersionAndBuildNumber: true
+      }
+    )
+  end
+
+  desc "Upload to Apple TestFlight"
+  lane :publish_testflight do |options|
+    ipa_path = lane_context[SharedValues::IPA_OUTPUT_PATH] || options[:ipa_path]
+    
+    upload_to_testflight(
+      ipa: ipa_path,
+      skip_waiting_for_build_processing: true,
+      distribute_external: false
+    )
+  end
+end

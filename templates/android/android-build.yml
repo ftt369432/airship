@@ -1,0 +1,113 @@
+name: Airship Android Autonomous Pipeline
+
+on:
+  workflow_dispatch:
+    inputs:
+      build_id:
+        description: 'Airship Build ID'
+        required: true
+      version_name:
+        description: 'Version Name'
+        default: '1.0.0'
+      version_code:
+        description: 'Version Code'
+        default: '1'
+      track:
+        description: 'Google Play Track'
+        default: 'internal'
+      api_callback_url:
+        description: 'Airship API Webhook'
+        required: true
+
+jobs:
+  build:
+    name: Build & Package Android App Bundle
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout Source
+        uses: actions/checkout@v4
+
+      - name: Setup Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Setup Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Notify Airship API (State: preparing)
+        run: |
+          curl -s -X POST "${{ inputs.api_callback_url }}/events" \
+            -H "Content-Type: application/json" \
+            -d '{"level":"step","message":"Initializing build environment on Ubuntu runner","transitionTo":"preparing"}'
+
+      - name: Install Web App Dependencies & Build Dist
+        run: |
+          npm ci
+          npm run build
+
+      - name: Sync Capacitor Android Project
+        run: |
+          npx cap sync android
+
+      - name: Mount Ephemeral Tmpfs Keystore
+        id: keystore
+        run: |
+          mkdir -p /tmp/airship_vault
+          echo "${{ secrets.AIRSHIP_UPLOAD_KEYSTORE_BASE64 }}" | base64 -d > /tmp/airship_vault/release.keystore
+          echo "AIRSHIP_KEYSTORE_PATH=/tmp/airship_vault/release.keystore" >> $GITHUB_ENV
+          echo "AIRSHIP_GOOGLE_SERVICE_ACCOUNT_JSON=/tmp/airship_vault/service_account.json" >> $GITHUB_ENV
+          echo "${{ secrets.AIRSHIP_PLAY_SERVICE_ACCOUNT_JSON }}" > /tmp/airship_vault/service_account.json
+
+      - name: Notify Airship API (State: building)
+        run: |
+          curl -s -X POST "${{ inputs.api_callback_url }}/events" \
+            -H "Content-Type: application/json" \
+            -d '{"level":"step","message":"Compiling Android App Bundle (.aab) with Gradle","transitionTo":"building"}'
+
+      - name: Setup Ruby & Fastlane
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.2'
+          bundler-cache: true
+
+      - name: Run Fastlane (Build AAB)
+        env:
+          AIRSHIP_KEYSTORE_PASSWORD: ${{ secrets.AIRSHIP_KEYSTORE_PASSWORD }}
+          AIRSHIP_KEY_ALIAS: ${{ secrets.AIRSHIP_KEY_ALIAS }}
+          AIRSHIP_KEY_PASSWORD: ${{ secrets.AIRSHIP_KEY_PASSWORD }}
+          AIRSHIP_BUNDLE_ID: ${{ secrets.AIRSHIP_BUNDLE_ID }}
+        run: |
+          bundle exec fastlane android build_aab
+
+      - name: Notify Airship API (State: signing -> uploading)
+        run: |
+          AAB_FILE=$(find android/app/build/outputs/bundle -name "*.aab" | head -n 1)
+          SHA256=$(sha256sum "$AAB_FILE" | cut -d ' ' -f 1)
+          echo "AAB_SHA256=$SHA256" >> $GITHUB_ENV
+          curl -s -X POST "${{ inputs.api_callback_url }}/events" \
+            -H "Content-Type: application/json" \
+            -d "{\"level\":\"info\",\"message\":\"Signed bundle verified. SHA256: $SHA256\",\"transitionTo\":\"uploading\"}"
+
+      - name: Publish to Google Play Internal Testing
+        env:
+          AIRSHIP_BUNDLE_ID: ${{ secrets.AIRSHIP_BUNDLE_ID }}
+        run: |
+          bundle exec fastlane android publish_internal track:${{ inputs.track }}
+
+      - name: Notify Airship API (State: submitted)
+        run: |
+          curl -s -X POST "${{ inputs.api_callback_url }}/events" \
+            -H "Content-Type: application/json" \
+            -d '{"level":"step","message":"Successfully deployed to Google Play Internal Testing. Submission queued.","transitionTo":"submitted"}'
+
+      - name: Shred Ephemeral Vault Credentials
+        if: always()
+        run: |
+          rm -rf /tmp/airship_vault

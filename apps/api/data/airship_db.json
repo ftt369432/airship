@@ -1,0 +1,490 @@
+{
+  "projects": {
+    "proj_syncura_official": {
+      "id": "proj_syncura_official",
+      "ownerId": "usr_default",
+      "name": "Syncura",
+      "bundleId": "health.syncura.app",
+      "sourceType": "zip",
+      "sourceRef": "I:\\Syncura",
+      "webDir": "dist",
+      "status": "configured",
+      "createdAt": "2026-11-02T21:14:40.871Z"
+    },
+    "proj_sutraflow_official": {
+      "id": "proj_sutraflow_official",
+      "ownerId": "usr_default",
+      "name": "SutraFlow Sovereign OS",
+      "bundleId": "ai.genieflow.sutraflow",
+      "sourceType": "zip",
+      "sourceRef": "I:\\sutraflow",
+      "webDir": "dist",
+      "status": "configured",
+      "createdAt": "2026-11-02T21:14:40.872Z"
+    },
+    "proj_1794106069015_mx2jh": {
+      "id": "proj_1794106069015_mx2jh",
+      "ownerId": "usr_default",
+      "name": "Airship Reference Test App",
+      "bundleId": "com.airship.testapp",
+      "sourceType": "url",
+      "sourceRef": "https://test.airship.dev",
+      "webDir": "dist",
+      "status": "live",
+      "createdAt": "2026-11-08T02:47:49.015Z"
+    },
+    "proj_1794106324803_5zq01": {
+      "id": "proj_1794106324803_5zq01",
+      "ownerId": "usr_default",
+      "name": "Airship Reference Test App",
+      "bundleId": "com.airship.testapp",
+      "sourceType": "url",
+      "sourceRef": "https://test.airship.dev",
+      "webDir": "dist",
+      "status": "live",
+      "createdAt": "2026-11-08T02:52:04.803Z"
+    }
+  },
+  "storeConnections": {
+    "conn_1794106069196": {
+      "id": "conn_1794106069196",
+      "ownerId": "usr_default",
+      "store": "play",
+      "label": "Google Play Release Key",
+      "ciphertext": "BASE64_CIPHERTEXT_MOCK",
+      "iv": "BASE64_IV_MOCK",
+      "wrappedDek": "WRAPPED_DEK_MOCK",
+      "kdfParams": {
+        "salt": "SALT_MOCK",
+        "iterations": 600000,
+        "hash": "SHA-256"
+      },
+      "createdAt": "2026-11-08T02:47:49.196Z"
+    },
+    "conn_1794106325400": {
+      "id": "conn_1794106325400",
+      "ownerId": "usr_default",
+      "store": "play",
+      "label": "Google Play Release Key",
+      "ciphertext": "BASE64_CIPHERTEXT_MOCK",
+      "iv": "BASE64_IV_MOCK",
+      "wrappedDek": "WRAPPED_DEK_MOCK",
+      "kdfParams": {
+        "salt": "SALT_MOCK",
+        "iterations": 600000,
+        "hash": "SHA-256"
+      },
+      "createdAt": "2026-11-08T02:52:05.400Z"
+    }
+  },
+  "builds": {
+    "bld_1794106069212": {
+      "id": "bld_1794106069212",
+      "projectId": "proj_1794106069015_mx2jh",
+      "platform": "android",
+      "versionName": "1.0.0",
+      "versionCode": 1,
+      "state": "submitted",
+      "startedAt": "2026-11-08T02:47:49.212Z",
+      "artifactPath": "/artifacts/com.airship.testapp-v1.0.0.aab",
+      "sha256": "c70cb68492496f217b54293d8deca4077910c6de5c1bb1adb4204ca1a3824dda"
+    },
+    "bld_1794106325446": {
+      "id": "bld_1794106325446",
+      "projectId": "proj_1794106324803_5zq01",
+      "platform": "android",
+      "versionName": "1.0.0",
+      "versionCode": 1,
+      "state": "submitted",
+      "startedAt": "2026-11-08T02:52:05.446Z",
+      "artifactPath": "/artifacts/com.airship.testapp-v1.0.0.aab",
+      "sha256": "792f441a67a66ed45c522df9ab040a941db0fb340529ea759eeec6bb563992f0"
+    }
+  },
+  "buildEvents": {
+    "bld_1794106069212": [
+      {
+        "id": 1,
+        "buildId": "bld_1794106069212",
+        "ts": "2026-11-08T02:47:49.212Z",
+        "level": "step",
+        "message": "Build queued for ANDROID (1.0.0#1)"
+      },
+      {
+        "id": 2,
+        "buildId": "bld_1794106069212",
+        "ts": "2026-11-08T02:47:49.227Z",
+        "level": "info",
+        "message": "Signing bundle with key: [REDACTED_PRIVATE_KEY]"
+      },
+      {
+        "id": 3,
+        "buildId": "bld_1794106069212",
+        "ts": "2026-11-08T02:47:49.432Z",
+        "level": "step",
+        "message": "[Runner] Initializing build environment for Airship Reference Test App..."
+      },
+      {
+        "id": 4,
+        "buildId": "bld_1794106069212",
+        "ts": "2026-11-08T02:47:49.447Z",
+        "level": "info",
+        "message": "Target: ANDROID (1.0.0#1) • Track: internal"
+      },
+      {
+        "id": 5,
+        "buildId": "bld_1794106069212",
+        "ts": "2026-11-08T02:47:49.464Z",
+        "level": "info",
+        "message": "Managed workspace provisioned at: E:\\.genieflowai.brain\\03_APPS\\airship\\apps\\api\\workspaces\\proj_1794106069015_mx2jh (Source: https://test.airship.dev)"
+      },
+      {
+        "id": 6,
+        "buildId": "bld_1794106069212",
+        "ts": "2026-11-08T02:47:49.643Z",
+        "level": "step",
+        "message": "Executing Fastlane build lane (bundle_release)..."
+      },
+      {
+        "id": 7,
+        "buildId": "bld_1794106069212",
+        "ts": "2026-11-08T02:47:49.657Z",
+        "level": "info",
+        "message": "Packaging Capacitor 7 runtime and web assets for com.airship.testapp..."
+      },
+      {
+        "id": 8,
+        "buildId": "bld_1794106069212",
+        "ts": "2026-11-08T02:47:49.831Z",
+        "level": "step",
+        "message": "Mounting zero-knowledge upload keystore in ephemeral runner..."
+      },
+      {
+        "id": 9,
+        "buildId": "bld_1794106069212",
+        "ts": "2026-11-08T02:47:49.847Z",
+        "level": "info",
+        "message": "Applying Rule 7 secret scrubber: All private keys and tokens scrubbed from logs."
+      },
+      {
+        "id": 10,
+        "buildId": "bld_1794106069212",
+        "ts": "2026-11-08T02:47:49.941Z",
+        "level": "info",
+        "message": "Signing release artifact with RSA-2048 SHA-256 (META-INF/MANIFEST.MF + CERT.RSA)..."
+      },
+      {
+        "id": 11,
+        "buildId": "bld_1794106069212",
+        "ts": "2026-11-08T02:47:50.135Z",
+        "level": "step",
+        "message": "Verifying binary signature and calculating SHA-256 integrity hash..."
+      },
+      {
+        "id": 12,
+        "buildId": "bld_1794106069212",
+        "ts": "2026-11-08T02:47:50.222Z",
+        "level": "info",
+        "message": "Packaged 13 entries (7,757 bytes) -> E:\\.genieflowai.brain\\03_APPS\\airship\\apps\\api\\artifacts\\com.airship.testapp-v1.0.0.aab"
+      },
+      {
+        "id": 13,
+        "buildId": "bld_1794106069212",
+        "ts": "2026-11-08T02:47:50.237Z",
+        "level": "info",
+        "message": "Checksum verified: SHA-256 c70cb68492496f217b54293d8deca4077910c6de5c1bb1adb4204ca1a3824dda"
+      },
+      {
+        "id": 14,
+        "buildId": "bld_1794106069212",
+        "ts": "2026-11-08T02:47:50.253Z",
+        "level": "info",
+        "message": "Artifact staged at: /artifacts/com.airship.testapp-v1.0.0.aab"
+      },
+      {
+        "id": 15,
+        "buildId": "bld_1794106069212",
+        "ts": "2026-11-08T02:47:50.480Z",
+        "level": "step",
+        "message": "Release artifact ready for internal deployment! Automated build succeeded."
+      }
+    ],
+    "bld_1794106325446": [
+      {
+        "id": 1,
+        "buildId": "bld_1794106325446",
+        "ts": "2026-11-08T02:52:05.446Z",
+        "level": "step",
+        "message": "Build queued for ANDROID (1.0.0#1)"
+      },
+      {
+        "id": 2,
+        "buildId": "bld_1794106325446",
+        "ts": "2026-11-08T02:52:05.465Z",
+        "level": "info",
+        "message": "Signing bundle with key: [REDACTED_PRIVATE_KEY]"
+      },
+      {
+        "id": 3,
+        "buildId": "bld_1794106325446",
+        "ts": "2026-11-08T02:52:05.737Z",
+        "level": "step",
+        "message": "[Runner] Initializing build environment for Airship Reference Test App..."
+      },
+      {
+        "id": 4,
+        "buildId": "bld_1794106325446",
+        "ts": "2026-11-08T02:52:05.774Z",
+        "level": "info",
+        "message": "Target: ANDROID (1.0.0#1) • Track: internal"
+      },
+      {
+        "id": 5,
+        "buildId": "bld_1794106325446",
+        "ts": "2026-11-08T02:52:05.787Z",
+        "level": "info",
+        "message": "Managed workspace provisioned at: E:\\.genieflowai.brain\\03_APPS\\airship\\apps\\dashboard\\workspaces\\proj_1794106324803_5zq01 (Source: https://test.airship.dev)"
+      },
+      {
+        "id": 6,
+        "buildId": "bld_1794106325446",
+        "ts": "2026-11-08T02:52:05.952Z",
+        "level": "step",
+        "message": "Executing Fastlane build lane (bundle_release)..."
+      },
+      {
+        "id": 7,
+        "buildId": "bld_1794106325446",
+        "ts": "2026-11-08T02:52:06.037Z",
+        "level": "info",
+        "message": "Packaging Capacitor 7 runtime and web assets for com.airship.testapp..."
+      },
+      {
+        "id": 8,
+        "buildId": "bld_1794106325446",
+        "ts": "2026-11-08T02:52:06.227Z",
+        "level": "step",
+        "message": "Mounting zero-knowledge upload keystore in ephemeral runner..."
+      },
+      {
+        "id": 9,
+        "buildId": "bld_1794106325446",
+        "ts": "2026-11-08T02:52:06.262Z",
+        "level": "info",
+        "message": "Applying Rule 7 secret scrubber: All private keys and tokens scrubbed from logs."
+      },
+      {
+        "id": 10,
+        "buildId": "bld_1794106325446",
+        "ts": "2026-11-08T02:52:06.279Z",
+        "level": "info",
+        "message": "Signing release artifact with RSA-2048 SHA-256 (META-INF/MANIFEST.MF + CERT.RSA)..."
+      },
+      {
+        "id": 11,
+        "buildId": "bld_1794106325446",
+        "ts": "2026-11-08T02:52:06.495Z",
+        "level": "step",
+        "message": "Verifying binary signature and calculating SHA-256 integrity hash..."
+      },
+      {
+        "id": 12,
+        "buildId": "bld_1794106325446",
+        "ts": "2026-11-08T02:52:06.611Z",
+        "level": "info",
+        "message": "Packaged 13 entries (7,757 bytes) -> E:\\.genieflowai.brain\\03_APPS\\airship\\apps\\api\\artifacts\\com.airship.testapp-v1.0.0.aab"
+      },
+      {
+        "id": 13,
+        "buildId": "bld_1794106325446",
+        "ts": "2026-11-08T02:52:06.630Z",
+        "level": "info",
+        "message": "Checksum verified: SHA-256 792f441a67a66ed45c522df9ab040a941db0fb340529ea759eeec6bb563992f0"
+      },
+      {
+        "id": 14,
+        "buildId": "bld_1794106325446",
+        "ts": "2026-11-08T02:52:06.667Z",
+        "level": "info",
+        "message": "Artifact staged at: /artifacts/com.airship.testapp-v1.0.0.aab"
+      },
+      {
+        "id": 15,
+        "buildId": "bld_1794106325446",
+        "ts": "2026-11-08T02:52:06.848Z",
+        "level": "step",
+        "message": "Release artifact ready for internal deployment! Automated build succeeded."
+      }
+    ]
+  },
+  "complianceReports": {
+    "proj_1794106069015_mx2jh": {
+      "score": 100,
+      "blockers": 0,
+      "warnings": 0,
+      "findings": [
+        {
+          "id": "apple-4.2-compliant",
+          "rule": "Apple Guideline 4.2",
+          "title": "Native Hardware Integration Verified",
+          "description": "Detected 6 native plugin(s): @capacitor/push-notifications, @capacitor/haptics, @capacitor/share, @revenuecat/purchases-capacitor, @capacitor/network, @capacitor/app. App demonstrates native capability.",
+          "severity": "INFO",
+          "fixType": "manual"
+        },
+        {
+          "id": "privacy-policy-detected",
+          "rule": "Apple 5.1.1 & Google Play Data Safety",
+          "title": "Privacy Policy Document Detected",
+          "description": "Local Privacy Policy file found in project repository.",
+          "severity": "INFO",
+          "fixType": "manual"
+        }
+      ],
+      "timestamp": "2026-11-08T02:47:49.179Z",
+      "summary": "100% Store Ready — Zero policy blockers or guideline warnings detected."
+    },
+    "proj_1794106324803_5zq01": {
+      "score": 100,
+      "blockers": 0,
+      "warnings": 0,
+      "findings": [
+        {
+          "id": "apple-4.2-compliant",
+          "rule": "Apple Guideline 4.2",
+          "title": "Native Hardware Integration Verified",
+          "description": "Detected 6 native plugin(s): @capacitor/push-notifications, @capacitor/haptics, @capacitor/share, @revenuecat/purchases-capacitor, @capacitor/network, @capacitor/app. App demonstrates native capability.",
+          "severity": "INFO",
+          "fixType": "manual"
+        },
+        {
+          "id": "privacy-policy-detected",
+          "rule": "Apple 5.1.1 & Google Play Data Safety",
+          "title": "Privacy Policy Document Detected",
+          "description": "Local Privacy Policy file found in project repository.",
+          "severity": "INFO",
+          "fixType": "manual"
+        }
+      ],
+      "timestamp": "2026-11-08T02:52:05.374Z",
+      "summary": "100% Store Ready — Zero policy blockers or guideline warnings detected."
+    }
+  },
+  "submissions": {
+    "sub_1794106069299_h6irr": {
+      "id": "sub_1794106069299_h6irr",
+      "submissionId": "sub_1794106069299_h6irr",
+      "projectId": "proj_1794106069015_mx2jh",
+      "bundleId": "com.airship.testapp",
+      "track": "internal",
+      "status": "submitted",
+      "reviewStatus": "live_internal",
+      "consoleUrl": "https://play.google.com/console",
+      "artifactPath": "/artifacts/com.airship.testapp-v1.0.0.aab",
+      "sha256": "3bf801ee1e55b7270b385de5989d684832cf025bddb416241bd73daee1a833d6",
+      "deployedAt": "2026-11-08T02:47:49.327Z",
+      "logs": [
+        "[StorePublisher] Verified signed release binary on disk: E:\\.genieflowai.brain\\03_APPS\\airship\\apps\\api\\artifacts\\com.airship.testapp-v1.0.0.aab (6,570 bytes)",
+        "[StorePublisher] Binary SHA-256: 3bf801ee1e55b7270b385de5989d684832cf025bddb416241bd73daee1a833d6",
+        "[StorePublisher] Credential connection: conn_1794106069196",
+        "[StorePublisher] Physical RSA-2048 signed package staged at: E:\\.genieflowai.brain\\03_APPS\\airship\\apps\\api\\artifacts\\com.airship.testapp-v1.0.0.aab",
+        "[StorePublisher] Ready for Google Play Console upload (com.airship.testapp -> track 'internal').",
+        "[StorePublisher] Tip: Unlock a Google Play Service Account JSON key in the Zero-Knowledge Vault for direct Android Publisher v3 API push, or upload com.airship.testapp-v1.0.0.aab directly in Play Console."
+      ]
+    },
+    "sub_1794106325489_k9fr8": {
+      "id": "sub_1794106325489_k9fr8",
+      "submissionId": "sub_1794106325489_k9fr8",
+      "projectId": "proj_1794106324803_5zq01",
+      "bundleId": "com.airship.testapp",
+      "track": "internal",
+      "status": "submitted",
+      "reviewStatus": "live_internal",
+      "consoleUrl": "https://play.google.com/console",
+      "artifactPath": "/artifacts/com.airship.testapp-v1.0.0.aab",
+      "sha256": "e8bbbee290a253c0bafa92a251a96e2ef838766f0c35e1bc09d7f1d2b836b619",
+      "deployedAt": "2026-11-08T02:52:05.582Z",
+      "logs": [
+        "[StorePublisher] Verified signed release binary on disk: E:\\.genieflowai.brain\\03_APPS\\airship\\apps\\api\\artifacts\\com.airship.testapp-v1.0.0.aab (6,570 bytes)",
+        "[StorePublisher] Binary SHA-256: e8bbbee290a253c0bafa92a251a96e2ef838766f0c35e1bc09d7f1d2b836b619",
+        "[StorePublisher] Credential connection: conn_1794106325400",
+        "[StorePublisher] Physical RSA-2048 signed package staged at: E:\\.genieflowai.brain\\03_APPS\\airship\\apps\\api\\artifacts\\com.airship.testapp-v1.0.0.aab",
+        "[StorePublisher] Ready for Google Play Console upload (com.airship.testapp -> track 'internal').",
+        "[StorePublisher] Tip: Unlock a Google Play Service Account JSON key in the Zero-Knowledge Vault for direct Android Publisher v3 API push, or upload com.airship.testapp-v1.0.0.aab directly in Play Console."
+      ]
+    }
+  },
+  "webDeployments": {
+    "dep_web_1794106069343_1cqm": {
+      "id": "dep_web_1794106069343_1cqm",
+      "projectId": "proj_1794106069015_mx2jh",
+      "provider": "cloudflare",
+      "siteName": "sutraflow-cf-test-x2jh",
+      "url": "https://sutraflow-cf-test-x2jh.pages.dev",
+      "status": "live",
+      "bundlePath": "/artifacts/sutraflow-cf-test-x2jh-web.zip",
+      "deployedAt": "2026-11-08T02:47:49.380Z",
+      "logs": [
+        "[Cloudflare Pages] Initializing edge deployment for 'Airship Reference Test App' (sutraflow-cf-test-x2jh)...",
+        "[Cloudflare Pages] Packaged 2 production web assets (931 bytes) -> E:\\.genieflowai.brain\\03_APPS\\airship\\apps\\api\\artifacts\\sutraflow-cf-test-x2jh-web.zip",
+        "[Cloudflare Pages] Credential mode: local_bundle_staged",
+        "[Cloudflare Pages] Production SPA bundle + _redirects verified at E:\\.genieflowai.brain\\03_APPS\\airship\\apps\\api\\artifacts\\sutraflow-cf-test-x2jh-web.zip.",
+        "[Cloudflare Pages] Add a Cloudflare Pages API Token in the Zero-Knowledge Vault to push directly to your live account.",
+        "[Cloudflare Pages] Target URL: https://sutraflow-cf-test-x2jh.pages.dev"
+      ]
+    },
+    "dep_web_1794106069395_rts2": {
+      "id": "dep_web_1794106069395_rts2",
+      "projectId": "proj_1794106069015_mx2jh",
+      "provider": "netlify",
+      "siteName": "genieflow-netlify-test-x2jh",
+      "url": "https://genieflow-netlify-test-x2jh.netlify.app",
+      "status": "live",
+      "bundlePath": "/artifacts/genieflow-netlify-test-x2jh-web.zip",
+      "deployedAt": "2026-11-08T02:47:49.410Z",
+      "logs": [
+        "[Netlify] Initializing edge deployment for 'Airship Reference Test App' (genieflow-netlify-test-x2jh)...",
+        "[Netlify] Packaged 2 production web assets (931 bytes) -> E:\\.genieflowai.brain\\03_APPS\\airship\\apps\\api\\artifacts\\genieflow-netlify-test-x2jh-web.zip",
+        "[Netlify] Credential mode: local_bundle_staged",
+        "[Netlify] Production SPA bundle + _redirects verified at E:\\.genieflowai.brain\\03_APPS\\airship\\apps\\api\\artifacts\\genieflow-netlify-test-x2jh-web.zip.",
+        "[Netlify] Add a Netlify API Token in the Zero-Knowledge Vault to push directly to your live account.",
+        "[Netlify] Target URL: https://genieflow-netlify-test-x2jh.netlify.app"
+      ]
+    },
+    "dep_web_1794106325633_kruh": {
+      "id": "dep_web_1794106325633_kruh",
+      "projectId": "proj_1794106324803_5zq01",
+      "provider": "cloudflare",
+      "siteName": "sutraflow-cf-test-zq01",
+      "url": "https://sutraflow-cf-test-zq01.pages.dev",
+      "status": "live",
+      "bundlePath": "/artifacts/sutraflow-cf-test-zq01-web.zip",
+      "deployedAt": "2026-11-08T02:52:05.721Z",
+      "logs": [
+        "[Cloudflare Pages] Initializing edge deployment for 'Airship Reference Test App' (sutraflow-cf-test-zq01)...",
+        "[Cloudflare Pages] Packaged 2 production web assets (931 bytes) -> E:\\.genieflowai.brain\\03_APPS\\airship\\apps\\api\\artifacts\\sutraflow-cf-test-zq01-web.zip",
+        "[Cloudflare Pages] Credential mode: local_bundle_staged",
+        "[Cloudflare Pages] Production SPA bundle + _redirects verified at E:\\.genieflowai.brain\\03_APPS\\airship\\apps\\api\\artifacts\\sutraflow-cf-test-zq01-web.zip.",
+        "[Cloudflare Pages] Add a Cloudflare Pages API Token in the Zero-Knowledge Vault to push directly to your live account.",
+        "[Cloudflare Pages] Target URL: https://sutraflow-cf-test-zq01.pages.dev"
+      ]
+    },
+    "dep_web_1794106325803_58dg": {
+      "id": "dep_web_1794106325803_58dg",
+      "projectId": "proj_1794106324803_5zq01",
+      "provider": "netlify",
+      "siteName": "genieflow-netlify-test-zq01",
+      "url": "https://genieflow-netlify-test-zq01.netlify.app",
+      "status": "live",
+      "bundlePath": "/artifacts/genieflow-netlify-test-zq01-web.zip",
+      "deployedAt": "2026-11-08T02:52:05.846Z",
+      "logs": [
+        "[Netlify] Initializing edge deployment for 'Airship Reference Test App' (genieflow-netlify-test-zq01)...",
+        "[Netlify] Packaged 2 production web assets (931 bytes) -> E:\\.genieflowai.brain\\03_APPS\\airship\\apps\\api\\artifacts\\genieflow-netlify-test-zq01-web.zip",
+        "[Netlify] Credential mode: local_bundle_staged",
+        "[Netlify] Production SPA bundle + _redirects verified at E:\\.genieflowai.brain\\03_APPS\\airship\\apps\\api\\artifacts\\genieflow-netlify-test-zq01-web.zip.",
+        "[Netlify] Add a Netlify API Token in the Zero-Knowledge Vault to push directly to your live account.",
+        "[Netlify] Target URL: https://genieflow-netlify-test-zq01.netlify.app"
+      ]
+    }
+  }
+}

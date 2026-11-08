@@ -1,0 +1,16 @@
+{
+  "name": "@airship/vault",
+  "version": "1.0.0",
+  "description": "Zero-knowledge client-side encryption and secret redaction engine for Airship",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "test": "node --test dist/tests/vault.test.js"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.3",
+    "@types/node": "^22.13.5"
+  }
+}

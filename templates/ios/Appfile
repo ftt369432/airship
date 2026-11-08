@@ -1,0 +1,3 @@
+app_identifier(ENV["AIRSHIP_BUNDLE_ID"])
+apple_id(ENV["AIRSHIP_APPLE_ID"])
+team_id(ENV["AIRSHIP_APPLE_TEAM_ID"])

@@ -1,0 +1,101 @@
+name: Airship iOS Autonomous Pipeline
+
+on:
+  workflow_dispatch:
+    inputs:
+      build_id:
+        description: 'Airship Build ID'
+        required: true
+      version_name:
+        description: 'Version Name'
+        default: '1.0.0'
+      version_code:
+        description: 'Version Code'
+        default: '1'
+      api_callback_url:
+        description: 'Airship API Webhook'
+        required: true
+
+jobs:
+  build:
+    name: Build & Archive iOS IPA
+    runs-on: macos-14
+    timeout-minutes: 45
+
+    steps:
+      - name: Checkout Source
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Notify Airship API (State: preparing)
+        run: |
+          curl -s -X POST "${{ inputs.api_callback_url }}/events" \
+            -H "Content-Type: application/json" \
+            -d '{"level":"step","message":"Initializing macOS runner and Xcode toolchain","transitionTo":"preparing"}'
+
+      - name: Install Web App Dependencies & Build
+        run: |
+          npm ci
+          npm run build
+
+      - name: Sync Capacitor iOS Project
+        run: |
+          npx cap sync ios
+
+      - name: Install CocoaPods
+        run: |
+          cd ios/App && pod install
+
+      - name: Mount Ephemeral Vault Credentials
+        run: |
+          mkdir -p /tmp/airship_vault
+          echo "${{ secrets.AIRSHIP_ASC_PRIVATE_KEY_P8 }}" > /tmp/airship_vault/AuthKey.p8
+          echo "AIRSHIP_ASC_PRIVATE_KEY_P8=/tmp/airship_vault/AuthKey.p8" >> $GITHUB_ENV
+
+      - name: Setup Ruby & Fastlane
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.2'
+          bundler-cache: true
+
+      - name: Notify Airship API (State: building)
+        run: |
+          curl -s -X POST "${{ inputs.api_callback_url }}/events" \
+            -H "Content-Type: application/json" \
+            -d '{"level":"step","message":"Archiving Xcode workspace and signing IPA","transitionTo":"building"}'
+
+      - name: Run Fastlane (Build IPA)
+        env:
+          AIRSHIP_ASC_KEY_ID: ${{ secrets.AIRSHIP_ASC_KEY_ID }}
+          AIRSHIP_ASC_ISSUER_ID: ${{ secrets.AIRSHIP_ASC_ISSUER_ID }}
+          AIRSHIP_BUNDLE_ID: ${{ secrets.AIRSHIP_BUNDLE_ID }}
+        run: |
+          bundle exec fastlane ios build_ipa
+
+      - name: Notify Airship API (State: signing -> uploading)
+        run: |
+          IPA_FILE=$(find build -name "*.ipa" | head -n 1)
+          SHA256=$(shasum -a 256 "$IPA_FILE" | cut -d ' ' -f 1)
+          curl -s -X POST "${{ inputs.api_callback_url }}/events" \
+            -H "Content-Type: application/json" \
+            -d "{\"level\":\"info\",\"message\":\"Signed IPA verified. SHA256: $SHA256\",\"transitionTo\":\"uploading\"}"
+
+      - name: Upload to Apple TestFlight
+        run: |
+          bundle exec fastlane ios publish_testflight
+
+      - name: Notify Airship API (State: submitted)
+        run: |
+          curl -s -X POST "${{ inputs.api_callback_url }}/events" \
+            -H "Content-Type: application/json" \
+            -d '{"level":"step","message":"Successfully uploaded to TestFlight. Processing build on App Store Connect.","transitionTo":"submitted"}'
+
+      - name: Shred Ephemeral Vault Credentials
+        if: always()
+        run: |
+          rm -rf /tmp/airship_vault

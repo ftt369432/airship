@@ -1,0 +1,33 @@
+# Dependencies
+node_modules/
+**/node_modules/
+
+# Build outputs
+dist/
+**/dist/
+build/
+.turbo/
+
+# Runtime & Ephemeral Artifacts
+workspaces/
+apps/api/artifacts/
+*.aab
+*.ipa
+*.apk
+
+# Secrets & Environment
+.env
+.env.*
+!.env.example
+*.keystore
+*.jks
+*.p8
+*.mobileprovision
+*service-account*.json
+
+# OS & Logs
+.DS_Store
+Thumbs.db
+desktop.ini
+*.log
+*.tmp

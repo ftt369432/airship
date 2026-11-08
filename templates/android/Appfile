@@ -1,0 +1,2 @@
+json_key_file(ENV["AIRSHIP_GOOGLE_SERVICE_ACCOUNT_JSON"])
+package_name(ENV["AIRSHIP_BUNDLE_ID"])
